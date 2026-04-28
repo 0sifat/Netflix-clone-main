@@ -16,18 +16,18 @@
 # EXPOSE 80
 # ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
-FROM node:16.17.0-alpine as builder
+FROM node:16.17.0-alpine AS builder
 WORKDIR /app
 COPY ./package.json .
-# REMOVED: COPY ./yarn.lock .        ← delete this line
-RUN npm install                       ← changed from yarn install
+RUN npm install
 ARG TMDB_V3_API_KEY
 ENV VITE_APP_TMDB_V3_API_KEY=$TMDB_V3_API_KEY
 COPY . .
-RUN npm run build                     ← changed from yarn build
+RUN npm run build
 
 FROM nginx:stable-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /app/dist .
+EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
