@@ -1,4 +1,3 @@
-import { TMDB_V3_API_KEY } from "src/constant";
 import { tmdbApi } from "./apiSlice";
 
 type ConfigurationType = {
@@ -19,7 +18,6 @@ export const extendedApi = tmdbApi.injectEndpoints({
     getConfiguration: build.query<ConfigurationType, undefined>({
       query: () => ({
         url: "/configuration",
-        params: { api_key: TMDB_V3_API_KEY },
       }),
     }),
   }),
