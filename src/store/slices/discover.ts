@@ -1,4 +1,3 @@
-import { TMDB_V3_API_KEY } from "src/constant";
 import { tmdbApi } from "./apiSlice";
 import { MEDIA_TYPE, PaginatedMovieResult } from "src/types/Common";
 import { MovieDetail } from "src/types/Movie";
@@ -68,7 +67,7 @@ const extendedApi = tmdbApi.injectEndpoints({
     >({
       query: ({ mediaType, genreId, page }) => ({
         url: `/discover/${mediaType}`,
-        params: { api_key: TMDB_V3_API_KEY, with_genres: genreId, page },
+        params: { with_genres: genreId, page },
       }),
       transformResponse: (
         response: PaginatedMovieResult,
@@ -89,7 +88,7 @@ const extendedApi = tmdbApi.injectEndpoints({
     >({
       query: ({ mediaType, apiString, page }) => ({
         url: `/${mediaType}/${apiString}`,
-        params: { api_key: TMDB_V3_API_KEY, page },
+        params: { page },
       }),
       transformResponse: (
         response: PaginatedMovieResult,
@@ -109,7 +108,7 @@ const extendedApi = tmdbApi.injectEndpoints({
     >({
       query: ({ mediaType, id }) => ({
         url: `/${mediaType}/${id}`,
-        params: { api_key: TMDB_V3_API_KEY, append_to_response: "videos" },
+        params: { append_to_response: "videos" },
       }),
     }),
     getSimilarVideos: build.query<
@@ -118,7 +117,6 @@ const extendedApi = tmdbApi.injectEndpoints({
     >({
       query: ({ mediaType, id }) => ({
         url: `/${mediaType}/${id}/similar`,
-        params: { api_key: TMDB_V3_API_KEY },
       }),
     }),
   }),

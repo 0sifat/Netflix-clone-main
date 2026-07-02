@@ -78,13 +78,21 @@
 - [video.js](https://videojs.com)
 - [react-slick](https://react-slick.neostack.com/)
 
-## Install with Docker
+## Run locally
 
 ```sh
-docker build --build-arg TMDB_V3_API_KEY=your_api_key_here -t netflix-clone .
-
-docker run --name netflix-clone-website --rm -d -p 80:80 netflix-clone
+pnpm install
+pnpm dev
 ```
+
+## Deploy on Vercel
+
+This app is ready to deploy on [Vercel](https://vercel.com):
+
+1. Import the GitHub repository into Vercel (or click "Publish" in v0).
+2. Vercel auto-detects the Vite framework preset (`pnpm build`, output in `dist`).
+3. Add the environment variable `VITE_TMDB_TOKEN` (your TMDB v4 Read Access Token) in the project settings.
+4. Deploy. Client-side routing is handled by the SPA rewrite in `vercel.json`.
 
 ## Todo
 
